@@ -174,6 +174,8 @@ in
       extraConfig = builtins.readFile ./config/kitty;
     };
 
+    xdg.configFile."kdeglobals".source = ./config/kdeglobals;
+
     home.packages = [
       pkgs.kitty
       pkgs.fzf
