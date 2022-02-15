@@ -126,6 +126,8 @@ in
         github.user = "ncwade";
         push.default = "simple";
         init.defaultBranch = "main";
+        url."git@github-gdcorp:/gdcorp-infosec".insteadOf = "https://github.com/gdcorp-infosec";
+        url."git@github.com:".insteadOf = "https://github.com/";
       };
     };
     programs.fish = {
@@ -175,6 +177,23 @@ in
     };
 
     xdg.configFile."kdeglobals".source = ./config/kdeglobals;
+    xdg.configFile."direnv/direnvrc".source = ./config/direnvrc;
+
+    programs.ssh = {
+      enable = true;
+      matchBlocks = {
+        "github.com" = {
+          hostname = "github.com";
+          identityFile = "~/.ssh/ncwade.pub";
+          identitiesOnly = true;
+        };
+        "github-gdcorp" = {
+          hostname = "github.com";
+          identityFile = "~/.ssh/nwade-previous-employer.pub";
+          identitiesOnly = true;
+        };
+      };
+    };
 
     home.sessionVariables = {
       CONFIGURE_OPTS="--with-openssl=$(nix eval --raw nixpkgs.openssl.dev.outPath)";
@@ -212,6 +231,8 @@ in
       pkgs.libcap
       pkgs.pre-commit
       pkgs.direnv
+      pkgs.gh
+      pkgs.pyright
     ];
   };
 }

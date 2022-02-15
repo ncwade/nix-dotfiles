@@ -6,6 +6,7 @@ gpg-connect-agent /bye
 #set -g theme_git_worktree_support yes
 set -g theme_display_k8s_context yes
 set -g theme_display_k8s_namespace yes
+set -g theme_newline_cursor yes
 
 if test -e ~/.asdf/asdf.fish
     source ~/.asdf/asdf.fish
@@ -20,3 +21,7 @@ if test -e ~/.asdf/asdf.fish
 end
 
 direnv hook fish | source
+alias nvim "direnv exec / nvim"
+set -x GOPRIVATE "github.com/gdcorp-*,github.secureserver.net"
+fish_add_path -m ~/.local/bin
+
