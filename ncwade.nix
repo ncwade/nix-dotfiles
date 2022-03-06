@@ -10,9 +10,18 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.neovim.enable = true;
-  programs.neovim.viAlias = true;
-  programs.neovim.vimAlias = true;
+  nixpkgs.config = {
+    chromium = {
+      enableWideVine = true;
+    };
+  };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
   environment.variables.EDITOR = "nvim";
   fonts.fonts = with pkgs; [
     jetbrains-mono
@@ -41,25 +50,15 @@ in
   };
 
   home-manager.users.ncwade = {
-    programs.firefox = {
+    programs.chromium = {
       enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          privacy-badger
-          ublock-origin
-          noscript
-          old-reddit-redirect
-          tree-style-tab
-          onepassword-password-manager
-        ];
-      profiles = {
-        home = {
-          id = 0;
-          settings = {
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          };
-          userChrome = builtins.readFile ./config/userChrome.css;
-        };
-      };
+      package = pkgs.ungoogled-chromium;
+      # TODO: This is broken for ungoogled chromium.
+      # extensions = [
+      #   { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+      #   { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1password
+      #   { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger
+      # ];
     };
 
     programs.neovim = {
