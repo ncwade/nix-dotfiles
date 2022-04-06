@@ -24,4 +24,5 @@ direnv hook fish | source
 alias nvim "direnv exec / nvim"
 set -x GOPRIVATE "github.com/gdcorp-*,github.secureserver.net"
 fish_add_path -m ~/.local/bin
+alias ssh="kitty +kitten ssh"
 
