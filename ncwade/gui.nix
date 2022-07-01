@@ -21,7 +21,6 @@
 
   home.packages = [
     pkgs.barrier
-    pkgs.signal
     pkgs.kitty
   ];
 }
