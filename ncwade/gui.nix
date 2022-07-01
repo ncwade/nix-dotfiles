@@ -16,7 +16,6 @@
     extraConfig = builtins.readFile ./config/kitty;
   };
 
-  xdg.configFile."kdeglobals".source = ./config/kdeglobals;
   xdg.configFile."direnv/direnvrc".source = ./config/direnvrc;
 
   home.packages = [
