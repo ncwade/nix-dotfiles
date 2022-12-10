@@ -1,17 +1,15 @@
-{ config, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
-in
+{ config, pkgs, home-manager, ... }:
 {
   imports = [
     ./common.nix
-    (import "${home-manager}/nixos")
+    home-manager.nixosModule
   ];
 
   home-manager.users.ncwade = { ... }: {
     imports = [ 
       ./cli.nix
     ];
+    home.stateVersion = "22.05";
   };
 }
 
