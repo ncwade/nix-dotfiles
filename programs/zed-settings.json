@@ -1,0 +1,59 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5"
+    }
+  },
+  "disable_ai": false,
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "bindings": {
+    "alt-enter": "editor::AcceptEditPrediction"
+  },
+  "icon_theme": "Material Icon Theme",
+  "ui_font_size": 14,
+  "buffer_font_size": null,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha"
+  },
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "terminal": {
+    "line_height": "standard",
+    "shell": {
+      "program": "fish"
+    }
+  },
+  "lsp": {
+    "terraform-ls": {
+      "initialization_options": {
+        "experimentalFeatures": {
+          "prefillRequiredFields": true
+        }
+      }
+    }
+  },
+  "languages": {
+    "HCL": {
+      "format_on_save": {
+        "external": {
+          "command": "/Users/ncwade/bin/terragrunt-fmt.sh"
+        }
+      }
+    }
+  },
+  "features": {
+    "edit_prediction_provider": "copilot"
+  }
+}
