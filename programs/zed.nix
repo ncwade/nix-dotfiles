@@ -20,6 +20,12 @@
         play_sound_when_agent_done = true;
         model_parameters = [ ];
       };
+      agent_servers = {
+        OpenCode = {
+          "command" = "opencode";
+          "args" = [ "acp" ];
+        };
+      };
       edit_predictions = {
         mode = "eager";
       };

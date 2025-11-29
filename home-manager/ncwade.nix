@@ -43,6 +43,7 @@
     pkgs.yq
     pkgs.nil
     pkgs.nixd
+    pkgs.opencode
   ];
 
   xdg.enable = true;
