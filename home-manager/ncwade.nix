@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -6,12 +6,11 @@
     ../programs/zed.nix
     ../programs/starship.nix
     ../programs/fish.nix
-    ../programs/nu.nix
   ];
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
   programs.nushell.enable = true;
-  home.packages = with pkgs; [
+  home.packages = [
     pkgs.direnv
     pkgs.ripgrep
     pkgs.bat
@@ -42,10 +41,22 @@
     pkgs.yamlfmt
     pkgs.yarn
     pkgs.yq
+    pkgs.nil
+    pkgs.nixd
   ];
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+
   xdg.enable = true;
   xdg.configHome = "/Users/ncwade/.config";
+
+  programs.git = {
+    enable = true;
+    settings = {
+      user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICy5wxb5jwVx1YDgXpGBVIF50w/i6R+RjuPfi2/btBLW SSH Key";
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      user.name = "Nick Wade";
+      user.email = "me@ncwade.com";
+      init.defaultBranch = "main";
+    };
+  };
 }
