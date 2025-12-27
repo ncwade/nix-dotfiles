@@ -6,6 +6,7 @@
     ../programs/zed.nix
     ../programs/starship.nix
     ../programs/fish.nix
+    ../programs/tmux.nix
   ];
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
@@ -22,20 +23,16 @@
     pkgs.codex
     pkgs.grype
     pkgs.coreutils
-    pkgs.grype
     pkgs.jj
     pkgs.jq
     pkgs.k9s
     pkgs.pipx
     pkgs.kubectl
     pkgs.kubectl-cnpg
-    pkgs.opentofu
     pkgs.prettier
     pkgs.skopeo
     pkgs.sshpass
     pkgs.syft
-    pkgs.terragrunt
-    pkgs.tmux
     pkgs.watch
     pkgs.wget
     pkgs.yamlfmt

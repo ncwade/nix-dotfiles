@@ -6,8 +6,11 @@ set -g theme_newline_cursor yes
 /opt/homebrew/bin/brew shellenv | source
 direnv hook fish | source
 alias nvim "direnv exec / nvim"
+fish_add_path $HOME/.local/bin
 
 alias cdr="cd \$(git rev-parse --show-toplevel)"
+set --export AWS_CONFIG_FILE $HOME/src/github.com/previous-employer/infrastructure/terraform/org/aws.config
+set --export NODE_EXTRA_CA_CERTS $HOME/zscaler-root.pem
 
 set --export POETRY_VIRTUALENVS_IN_PROJECT "true"
 set --export TGENV_ARCH "arm64"
