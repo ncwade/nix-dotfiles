@@ -5,6 +5,8 @@
     "title" = "";
     "mouse-hide-while-typing" = true;
     "command" = "/run/current-system/sw/bin/fish --login --interactive";
+    "window-padding-x" = 16;
+    "window-padding-y" = 16;
   };
 
   ghosttyToml = (pkgs.formats.toml {}).generate "ghostty-config" ghosttySettings;

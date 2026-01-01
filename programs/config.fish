@@ -9,13 +9,13 @@ alias nvim "direnv exec / nvim"
 fish_add_path $HOME/.local/bin
 
 alias cdr="cd \$(git rev-parse --show-toplevel)"
-set --export AWS_CONFIG_FILE $HOME/src/github.com/previous-employer/infrastructure/terraform/org/aws.config
-set --export NODE_EXTRA_CA_CERTS $HOME/zscaler-root.pem
 
 set --export POETRY_VIRTUALENVS_IN_PROJECT "true"
 set --export TGENV_ARCH "arm64"
 set --export SSH_AUTH_SOCK ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 set --export EDITOR nvim
+
+source ~/.local/configs/fish/*
 
 starship init fish | source
 mise activate fish | source
