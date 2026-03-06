@@ -11,28 +11,44 @@
       "catppuccin-icons"
     ];
     userSettings = {
+      disable_ai = true;
+      colorize_brackets = true;
       theme = {
         mode = "system";
         dark = "Catppuccin Mocha";
         light = "One Light";
       };
       agent = {
-        play_sound_when_agent_done = true;
+        default_model = {
+          provider = "copilot_chat";
+          model = "gpt-5";
+        };
         model_parameters = [ ];
+        play_sound_when_agent_done = true;
       };
       agent_servers = {
+        "OpenCode (Local)" = {
+          type = "custom";
+          command = "/Users/ncwade/src/github.com/anomalyco/opencode/packages/opencode/dist/opencode-darwin-arm64/bin/opencode";
+          args = [ "acp" ];
+        };
         OpenCode = {
-          "command" = "opencode";
-          "args" = [ "acp" ];
+          type = "custom";
+          command = "opencode";
+          args = [ "acp" ];
         };
       };
       edit_predictions = {
+        provider = "copilot";
         mode = "eager";
       };
       icon_theme = "Catppuccin Mocha";
       ui_font_size = 14;
       buffer_font_family = "JetBrainsMono Nerd Font Mono";
       terminal = {
+        shell = {
+          program = "fish";
+        };
         line_height = "standard";
       };
     };
