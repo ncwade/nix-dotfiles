@@ -15,7 +15,11 @@ set --export TGENV_ARCH "arm64"
 set --export SSH_AUTH_SOCK ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 set --export EDITOR nvim
 
-source ~/.local/configs/fish/*
+for file in ~/.local/configs/fish/*
+    if test -f $file
+        source $file
+    end
+end
 
 starship init fish | source
 mise activate fish | source

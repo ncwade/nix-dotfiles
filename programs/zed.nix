@@ -9,6 +9,7 @@
       "nix"
       "fish"
       "catppuccin-icons"
+      "astro"
     ];
     userSettings = {
       disable_ai = true;
