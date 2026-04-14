@@ -38,7 +38,7 @@
     pkgs.wget
     pkgs.yamlfmt
     pkgs.yarn
-    pkgs.yq
+    pkgs.yq-go
     pkgs.nil
     pkgs.nixd
     pkgs.opencode
