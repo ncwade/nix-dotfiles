@@ -1,10 +1,15 @@
 {pkgs, ...}: let
+  fishCommand =
+    if pkgs.stdenv.isDarwin
+    then "/run/current-system/sw/bin/fish --login --interactive"
+    else "${pkgs.fish}/bin/fish --login --interactive";
+
   ghosttySettings = {
     "font-size" = 14;
     "theme" = "theme.conf";
     "title" = "";
     "mouse-hide-while-typing" = true;
-    "command" = "/run/current-system/sw/bin/fish --login --interactive";
+    "command" = fishCommand;
     "window-padding-x" = 16;
     "window-padding-y" = 16;
   };
