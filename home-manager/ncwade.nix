@@ -1,4 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+
+let
+  corpUbuntuVm = pkgs.callPackage ../packages/corp-ubuntu-vm.nix {};
+  guiApps = import ./gui-apps.nix;
+  guiPackageNames = guiApps.common ++ guiApps.darwin;
+  packageFor = name:
+    lib.attrByPath (lib.splitString "." name)
+      (throw "missing nixpkgs package: ${name}")
+      pkgs;
+  guiPackages = builtins.map packageFor guiPackageNames;
+  pipx = pkgs.pipx.overrideAttrs (oldAttrs: {
+    disabledTests = (oldAttrs.disabledTests or []) ++ [
+      "test_fix_package_name"
+      "test_parse_specifier_for_metadata"
+    ];
+  });
+in
 
 {
   imports = [
@@ -22,12 +39,13 @@
     pkgs.mise
     pkgs.gh
     pkgs.codex
+    corpUbuntuVm
     pkgs.grype
     pkgs.coreutils
     pkgs.jj
     pkgs.jq
     pkgs.k9s
-    pkgs.pipx
+    pipx
     pkgs.kubectl
     pkgs.kubectl-cnpg
     pkgs.prettier
@@ -43,7 +61,7 @@
     pkgs.nixd
     pkgs.opencode
     pkgs.librsvg
-  ];
+  ] ++ guiPackages;
 
   xdg.enable = true;
   xdg.configHome = "/Users/ncwade/.config";

@@ -52,6 +52,14 @@
         };
         line_height = "standard";
       };
+      ssh_connections = [
+        {
+          host = "corp-ubuntu-nix";
+          username = "ncwade";
+          nickname = "Corporate Ubuntu VM";
+          upload_binary_over_ssh = true;
+        }
+      ];
     };
     userKeymaps = [
       {
