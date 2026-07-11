@@ -2,7 +2,10 @@
 {
   programs.tmux = {
     enable = true;
-    shell = "/run/current-system/sw/bin/fish";
+    shell =
+      if pkgs.stdenv.isDarwin
+      then "/run/current-system/sw/bin/fish"
+      else "${pkgs.fish}/bin/fish";
     terminal = "tmux-256color";
     prefix = "C-s";
     mouse = true;

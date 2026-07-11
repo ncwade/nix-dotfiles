@@ -46,5 +46,19 @@ if type -q starship
 end
 
 if type -q mise
-    mise activate fish | source
+    if set -q MVM_MISE_HOOK_ON_PWD
+        # mvm sets this before config.fish is sourced. `mise activate` normally
+        # evaluates hook-env before every prompt; on a VirtioFS mount that can
+        # dominate prompt latency. Keep mise's full environment support, but
+        # update it when PWD changes instead.
+        mise activate --no-hook-env fish | source
+
+        function __mvm_mise_hook_env --on-variable PWD --description 'Update mise environment after directory changes'
+            command mise hook-env -s fish | source
+        end
+
+        __mvm_mise_hook_env
+    else
+        mise activate fish | source
+    end
 end
