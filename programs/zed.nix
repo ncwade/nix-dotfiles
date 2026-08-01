@@ -2,6 +2,8 @@
 {
   programs.zed-editor = {
     enable = true;
+    # Use the Homebrew-installed app on macOS and keep Home Manager for config only.
+    package = null;
     extensions = [
       "html"
       "catppuccin"

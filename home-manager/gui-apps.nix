@@ -1,7 +1,5 @@
 {
-  common = [
-    "zed-editor"
-  ];
+  common = [ ];
 
   linux = [
     "_1password-cli"
@@ -31,6 +29,7 @@
     "wireshark"
     "yubikey-manager"
     "yubioath-flutter"
+    "zed-editor"
     "zarf"
   ];
 
