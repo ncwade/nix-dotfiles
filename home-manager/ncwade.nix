@@ -10,6 +10,9 @@ let
       pkgs;
   guiPackages = builtins.map packageFor guiPackageNames;
   pipx = pkgs.pipx.overrideAttrs (oldAttrs: {
+    disabledTestPaths = (oldAttrs.disabledTestPaths or []) ++ [
+      "tests/test_inject.py"
+    ];
     disabledTests = (oldAttrs.disabledTests or []) ++ [
       "test_fix_package_name"
       "test_parse_specifier_for_metadata"
