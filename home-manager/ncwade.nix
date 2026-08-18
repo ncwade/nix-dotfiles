@@ -9,6 +9,13 @@ let
       (throw "missing nixpkgs package: ${name}")
       pkgs;
   guiPackages = builtins.map packageFor guiPackageNames;
+  kubectlKrew = pkgs.symlinkJoin {
+    name = "kubectl-krew-${pkgs.krew.version}";
+    paths = [ pkgs.krew ];
+    postBuild = ''
+      ln -s "$out/bin/krew" "$out/bin/kubectl-krew"
+    '';
+  };
   pipx = pkgs.pipx.overrideAttrs (oldAttrs: {
     disabledTestPaths = (oldAttrs.disabledTestPaths or []) ++ [
       "tests/test_inject.py"
@@ -48,6 +55,7 @@ in
     pkgs.jj
     pkgs.jq
     pkgs.k9s
+    kubectlKrew
     pipx
     pkgs.kubectl
     pkgs.kubectl-cnpg

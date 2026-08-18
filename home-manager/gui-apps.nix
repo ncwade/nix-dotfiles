@@ -33,5 +33,18 @@
     "zarf"
   ];
 
-  darwin = [ ];
+  darwin = [
+    "awscli2"
+    "gopls"
+    "inetutils"
+    "kubernetes-helm"
+    "lua5_5"
+    "markdownlint-cli"
+    "open-policy-agent"
+    "postgresql_14"
+    "redis"
+    "trivy"
+    "yubikey-manager"
+    "zarf"
+  ];
 }
