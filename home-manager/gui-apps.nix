@@ -6,6 +6,7 @@
     "_1password-gui"
     "awscli2"
     "checkov"
+    "code-cursor"
     "firefox"
     "ghostty"
     "gopls"

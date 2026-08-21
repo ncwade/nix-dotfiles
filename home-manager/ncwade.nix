@@ -29,6 +29,7 @@ in
 
 {
   imports = [
+    ../programs/cursor.nix
     ../programs/ghostty.nix
     ../programs/opencode.nix
     ../programs/zed.nix
