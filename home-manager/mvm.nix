@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    ../programs/cursor.nix
     ../programs/fish.nix
     ../programs/starship.nix
     ../programs/opencode.nix
