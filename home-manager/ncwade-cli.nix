@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   corpUbuntuVm = pkgs.callPackage ../packages/corp-ubuntu-vm.nix {};
@@ -74,7 +74,7 @@ in
   ] ++ cliPackages;
 
   xdg.enable = true;
-  xdg.configHome = "/Users/ncwade/.config";
+  xdg.configHome = "${config.home.homeDirectory}/.config";
 
   programs.git = {
     enable = true;
