@@ -125,6 +125,37 @@ function update-github-repos --description 'Fast-forward pull every child GitHub
     end
 end
 
+function ghcr-login --description 'Authenticate Docker to GitHub Container Registry using gh'
+    if test (count $argv) -ne 0
+        echo "Usage: ghcr-login" >&2
+        return 2
+    end
+
+    if not type -q gh
+        echo "ghcr-login requires the GitHub CLI (gh)." >&2
+        return 1
+    end
+
+    if not type -q docker
+        echo "ghcr-login requires Docker." >&2
+        return 1
+    end
+
+    set -l username (command gh api user --jq .login)
+    set -l username_status $status
+    if test $username_status -ne 0
+        return $username_status
+    end
+
+    set -l token (command gh auth token)
+    set -l token_status $status
+    if test $token_status -ne 0
+        return $token_status
+    end
+
+    printf '%s\n' "$token" | command docker login ghcr.io --username "$username" --password-stdin
+end
+
 set --export POETRY_VIRTUALENVS_IN_PROJECT "true"
 if test (uname -m) = arm64
     set --export TGENV_ARCH "arm64"
