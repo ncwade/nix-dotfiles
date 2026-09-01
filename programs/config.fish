@@ -26,6 +26,105 @@ fish_add_path $HOME/.local/bin
 
 alias cdr="cd \$(git rev-parse --show-toplevel)"
 
+function clone-github-org --description 'Clone every accessible repository in a GitHub organization'
+    if test (count $argv) -ne 1
+        echo "Usage: clone-github-org <github-org>" >&2
+        return 2
+    end
+
+    if not type -q gh
+        echo "clone-github-org requires the GitHub CLI (gh)." >&2
+        return 1
+    end
+
+    if not type -q git
+        echo "clone-github-org requires git." >&2
+        return 1
+    end
+
+    set -l org $argv[1]
+    set -l repos (command gh api --paginate "orgs/$org/repos?type=all&per_page=100" --jq '.[] | [.visibility, .name, .ssh_url] | @tsv')
+    set -l list_status $status
+    if test $list_status -ne 0
+        return $list_status
+    end
+
+    if test (count $repos) -eq 0
+        echo "No accessible repositories found for $org." >&2
+        return 0
+    end
+
+    set -l failed 0
+    for repo in $repos
+        set -l fields (string split \t -- "$repo")
+        set -l visibility (string lower -- $fields[1])
+        set -l name $fields[2]
+        set -l ssh_url $fields[3]
+        set -l destination "$org/$visibility/$name"
+
+        if test -e "$destination"
+            echo "Skipping $destination (already exists)"
+            continue
+        end
+
+        mkdir -p "$org/$visibility"
+        echo "Cloning $ssh_url -> $destination"
+        if not command git clone "$ssh_url" "$destination"
+            set failed (math $failed + 1)
+        end
+    end
+
+    if test $failed -gt 0
+        echo "$failed repository clone(s) failed." >&2
+        return 1
+    end
+end
+
+function update-github-repos --description 'Fast-forward pull every child GitHub repository'
+    if test (count $argv) -ne 0
+        echo "Usage: update-github-repos" >&2
+        return 2
+    end
+
+    if not type -q git
+        echo "update-github-repos requires git." >&2
+        return 1
+    end
+
+    set -l git_dirs (command find . -type d -name .git -prune -print)
+    if test (count $git_dirs) -eq 0
+        echo "No child Git repositories found."
+        return 0
+    end
+
+    set -l failed 0
+    set -l updated 0
+    for git_dir in $git_dirs
+        set -l repo (dirname "$git_dir")
+        set -l remote_url (command git -C "$repo" remote get-url origin 2>/dev/null)
+
+        if not string match -qr '(^|[@/:])github\.com([/:]|$)' -- "$remote_url"
+            continue
+        end
+
+        echo "Updating $repo"
+        if command git -C "$repo" pull --ff-only
+            set updated (math $updated + 1)
+        else
+            set failed (math $failed + 1)
+        end
+    end
+
+    if test $updated -eq 0; and test $failed -eq 0
+        echo "No child GitHub repositories found."
+    end
+
+    if test $failed -gt 0
+        echo "$failed repository update(s) failed." >&2
+        return 1
+    end
+end
+
 set --export POETRY_VIRTUALENVS_IN_PROJECT "true"
 if test (uname -m) = arm64
     set --export TGENV_ARCH "arm64"

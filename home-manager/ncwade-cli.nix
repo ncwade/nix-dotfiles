@@ -32,6 +32,7 @@ in
   imports = [
     ../programs/ghostty.nix
     ../programs/opencode.nix
+    ../programs/zed.nix
     ../programs/starship.nix
     ../programs/fish.nix
     ../programs/tmux.nix
@@ -82,9 +83,25 @@ in
       user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICy5wxb5jwVx1YDgXpGBVIF50w/i6R+RjuPfi2/btBLW SSH Key";
       commit.gpgsign = true;
       gpg.format = "ssh";
+      gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      core.sshCommand = "ssh -o PubkeyAcceptedAlgorithms=+ssh-ed25519 -o 'IdentityAgent=\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"'";
       user.name = "Nick Wade";
       user.email = "me@ncwade.com";
       init.defaultBranch = "main";
     };
+    includes = [
+      {
+        condition = "gitdir/i:~/src/github.com/ncwade/";
+        contents.user.email = "me@ncwade.com";
+      }
+      {
+        condition = "gitdir/i:~/src/github.com/work-projects/";
+        contents.user.email = "work@example.invalid";
+      }
+      {
+        condition = "gitdir/i:~/src/github.com/work-org/";
+        contents.user.email = "work@example.invalid";
+      }
+    ];
   };
 }

@@ -14,7 +14,10 @@
       "astro"
     ];
     userSettings = {
-      disable_ai = true;
+      # Sign in through Zed's AI settings with the ChatGPT account that owns
+      # the subscription. Zed stores the resulting credentials in the system
+      # keychain, rather than in this declarative settings file.
+      disable_ai = false;
       colorize_brackets = true;
       theme = {
         mode = "system";
@@ -23,27 +26,21 @@
       };
       agent = {
         default_model = {
-          provider = "copilot_chat";
-          model = "gpt-5";
+          provider = "openai-subscribed";
+          model = "gpt-5.6-sol";
         };
         model_parameters = [ ];
         play_sound_when_agent_done = true;
       };
       agent_servers = {
-        "OpenCode (Local)" = {
-          type = "custom";
-          command = "/Users/ncwade/src/github.com/anomalyco/opencode/packages/opencode/dist/opencode-darwin-arm64/bin/opencode";
-          args = [ "acp" ];
-        };
-        OpenCode = {
-          type = "custom";
-          command = "opencode";
-          args = [ "acp" ];
+        # The ACP Registry supplies and keeps this adapter current.
+        codex-acp = {
+          type = "registry";
         };
       };
       edit_predictions = {
-        provider = "copilot";
-        mode = "eager";
+        # ChatGPT subscriptions provide Zed Agent models, not edit predictions.
+        provider = "none";
       };
       icon_theme = "Catppuccin Mocha";
       ui_font_size = 14;
