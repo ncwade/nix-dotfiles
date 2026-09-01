@@ -25,6 +25,7 @@ end
 fish_add_path $HOME/.local/bin
 
 alias cdr="cd \$(git rev-parse --show-toplevel)"
+alias uds-fleet-dev="tmuxinator start uds-fleet-dev"
 
 function clone-github-org --description 'Clone every accessible repository in a GitHub organization'
     if test (count $argv) -ne 1
@@ -169,6 +170,12 @@ for file in ~/.local/configs/fish/*
     if test -f $file
         source $file
     end
+end
+
+if set -q TMUX
+    set -gx STARSHIP_CONFIG "$HOME/.config/starship-tmux.toml"
+else
+    set -gx STARSHIP_CONFIG "$HOME/.config/starship.toml"
 end
 
 if type -q starship
