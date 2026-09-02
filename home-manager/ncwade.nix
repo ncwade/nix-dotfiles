@@ -33,6 +33,7 @@ in
     ../programs/ghostty.nix
     ../programs/opencode.nix
     ../programs/zed.nix
+    ../programs/codex.nix
     ../programs/starship.nix
     ../programs/fish.nix
     ../programs/tmux.nix
