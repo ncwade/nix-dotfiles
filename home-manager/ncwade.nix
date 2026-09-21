@@ -2,12 +2,14 @@
 
 let
   corpUbuntuVm = pkgs.callPackage ../packages/corp-ubuntu-vm.nix {};
+  darwinCliPackageNames = import ./darwin-cli-packages.nix;
   guiApps = import ./gui-apps.nix;
   guiPackageNames = guiApps.common ++ guiApps.darwin;
   packageFor = name:
     lib.attrByPath (lib.splitString "." name)
       (throw "missing nixpkgs package: ${name}")
       pkgs;
+  darwinCliPackages = builtins.map packageFor darwinCliPackageNames;
   guiPackages = builtins.map packageFor guiPackageNames;
   kubectlKrew = pkgs.symlinkJoin {
     name = "kubectl-krew-${pkgs.krew.version}";
@@ -74,7 +76,7 @@ in
     pkgs.nixd
     pkgs.opencode
     pkgs.librsvg
-  ] ++ guiPackages;
+  ] ++ darwinCliPackages ++ guiPackages;
 
   xdg.enable = true;
   xdg.configHome = "/Users/ncwade/.config";

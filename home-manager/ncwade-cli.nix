@@ -2,6 +2,7 @@
 
 let
   corpUbuntuVm = pkgs.callPackage ../packages/corp-ubuntu-vm.nix {};
+  darwinCliPackageNames = import ./darwin-cli-packages.nix;
   guiApps = import ./gui-apps.nix;
   # Darwin entries in gui-apps.nix are CLI tools (awscli, helm, etc.).
   cliPackageNames = guiApps.common ++ guiApps.darwin;
@@ -9,7 +10,7 @@ let
     lib.attrByPath (lib.splitString "." name)
       (throw "missing nixpkgs package: ${name}")
       pkgs;
-  cliPackages = builtins.map packageFor cliPackageNames;
+  cliPackages = builtins.map packageFor (darwinCliPackageNames ++ cliPackageNames);
   kubectlKrew = pkgs.symlinkJoin {
     name = "kubectl-krew-${pkgs.krew.version}";
     paths = [ pkgs.krew ];
