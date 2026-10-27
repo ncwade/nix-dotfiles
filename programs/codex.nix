@@ -39,6 +39,15 @@ let
     "verify-and-stop"
   ];
   skillRoot = "${config.home.homeDirectory}/.codex/skills";
+  gitWorkflowSource =
+    if config.programs.personalWiki.enable then
+      pkgs.writeTextDir "SKILL.md" (
+        builtins.readFile ../skills/git-workflow/SKILL.md
+        + "\n"
+        + builtins.readFile ../skills/personal-wiki/references/git-authorization.md
+      )
+    else
+      ../skills/git-workflow;
   installSkill = name: source: ''
     $DRY_RUN_CMD ${pkgs.rsync}/bin/rsync \
       --archive \
@@ -49,6 +58,8 @@ let
   '';
 in
 {
+  imports = [ ./personal-wiki.nix ];
+
   # Codex 0.153.x ignores skills whose SKILL.md is a symlink. Home Manager's
   # home.file creates symlinks, so copy these trees after it finishes linking.
   home.activation.installCodexSkills = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
@@ -57,6 +68,6 @@ in
       skill: installSkill skill "${cavemanSource}/skills/${skill}"
     ) cavemanSkills}
     ${installSkill "i-have-adhd" "${adhdSource}/skills/i-have-adhd"}
-    ${installSkill "git-workflow" ../skills/git-workflow}
+    ${installSkill "git-workflow" gitWorkflowSource}
   '';
 }
