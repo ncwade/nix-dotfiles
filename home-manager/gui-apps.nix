@@ -42,7 +42,6 @@
     "markdownlint-cli"
     "open-policy-agent"
     "postgresql_14"
-    "redis"
     "trivy"
     "yubikey-manager"
     "zarf"
