@@ -198,3 +198,8 @@ if type -q mise
         mise activate fish | source
     end
 end
+
+# Rex supplies the CLI that matches its server; restore it after Nix/PATH setup.
+if set -q REX_BIN_DIR; and test -n "$REX_BIN_DIR"
+    fish_add_path --path --prepend --move "$REX_BIN_DIR"
+end
