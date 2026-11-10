@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 
 let
-  corpUbuntuVm = pkgs.callPackage ../packages/corp-ubuntu-vm.nix {};
   darwinCliPackageNames = import ./darwin-cli-packages.nix;
   guiApps = import ./gui-apps.nix;
   guiPackageNames = guiApps.common ++ guiApps.darwin;
@@ -53,7 +52,6 @@ in
     pkgs.mise
     pkgs.gh
     pkgs.codex
-    corpUbuntuVm
     pkgs.grype
     pkgs.coreutils
     pkgs.jj
