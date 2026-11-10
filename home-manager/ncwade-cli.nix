@@ -94,14 +94,6 @@ in
         condition = "gitdir/i:~/src/github.com/ncwade/";
         contents.user.email = "me@ncwade.com";
       }
-      {
-        condition = "gitdir/i:~/src/github.com/work-projects/";
-        contents.user.email = "work@example.invalid";
-      }
-      {
-        condition = "gitdir/i:~/src/github.com/work-org/";
-        contents.user.email = "work@example.invalid";
-      }
     ];
   };
 }

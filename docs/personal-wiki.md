@@ -10,9 +10,9 @@ are never automatically captured.
 
 The integration is disabled by default. Only the explicit `luna` host entry in
 `flake.nix` enables it and selects `https://github.com/ncwade/personal-wiki.git`.
-`retired-work-mac` and `work-mac` remain disabled, as do new hosts unless they
-explicitly opt in. Keep opt-ins in personal host definitions, not shared Home
-Manager user modules: the same user profile can serve a work Mac.
+Employer hosts supplied by the private employer flake remain disabled, as do
+new hosts unless they explicitly opt in. Keep opt-ins in personal host definitions,
+not shared Home Manager user modules: the same user profile can serve a work Mac.
 
 Disabled hosts install no wiki helper/settings, wiki skill, global routing or
 permission grants, or sync job. Their git-workflow skill retains its normal
