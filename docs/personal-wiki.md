@@ -9,7 +9,7 @@ are never automatically captured.
 ## Configuration and activation
 
 The integration is disabled by default. Only the explicit `luna` host entry in
-`flake.nix` enables it and selects `https://github.com/ncwade/personal-wiki.git`.
+`nix-hosts/flake.nix` enables it and selects `https://github.com/ncwade/personal-wiki.git`.
 Employer hosts supplied by the private employer flake remain disabled, as do
 new hosts unless they explicitly opt in. Keep opt-ins in personal host definitions,
 not shared Home Manager user modules: the same user profile can serve a work Mac.
@@ -45,7 +45,7 @@ and its branch must be checked during setup.
 Close Codex to avoid concurrent configuration writes, then activate this Mac:
 
 ```sh
-cd /Users/ncwade/src/github.com/ncwade/nix-config
+cd /Users/ncwade/src/github.com/ncwade/nix-hosts
 sudo darwin-rebuild switch --flake path:.#luna
 ```
 
@@ -198,13 +198,13 @@ of disabling it; merely disabling the option does not erase those prior copies.
 The wiki and GitHub repository are never deleted. Nix rollback does not roll
 back wiki content, copied skills, or mutable config blocks.
 
-Run local tests (all Git repositories/remotes are disposable and local):
+Run local tests from the `nix-dotfiles` checkout (all test repositories/remotes are disposable and local):
 
 ```sh
 python3 -B -m unittest discover -s tests -p 'test_personal_wiki*.py'
 ```
 
-Nix evaluation/build checks module integration and the launchd job. Local Git
+Evaluation/builds through `nix-hosts` check module integration and the launchd job. Local Git
 tests exercise commits, signing failure, locks, dirty trees, remote/branch
 mismatch, fast-forwards, pushes, and divergence. These tests do not establish
 real GitHub credentials or live desktop permissions; verify after activation.

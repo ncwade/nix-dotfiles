@@ -20,10 +20,6 @@ in
     ../programs/tmux.nix
   ];
 
-  home.username = "ncwade";
-  # Lima gives the guest user a distinct home so it never collides with the
-  # macOS home directory exposed through mounts.
-  home.homeDirectory = "/home/ncwade.guest";
   home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
