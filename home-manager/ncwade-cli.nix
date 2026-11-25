@@ -31,7 +31,6 @@ in
 {
   imports = [
     ../programs/ghostty.nix
-    ../programs/opencode.nix
     ../programs/zed.nix
     ../programs/codex.nix
     ../programs/starship.nix
@@ -71,7 +70,6 @@ in
     pkgs.yq-go
     pkgs.nil
     pkgs.nixd
-    pkgs.opencode
   ] ++ cliPackages;
 
   xdg.enable = true;

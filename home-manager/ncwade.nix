@@ -30,10 +30,8 @@ in
 
 {
   imports = [
-    ../programs/amp.nix
     ../programs/codex.nix
     ../programs/ghostty.nix
-    ../programs/opencode.nix
     ../programs/zed.nix
     ../programs/starship.nix
     ../programs/fish.nix
@@ -72,7 +70,6 @@ in
     pkgs.yq-go
     pkgs.nil
     pkgs.nixd
-    pkgs.opencode
     pkgs.librsvg
   ] ++ darwinCliPackages ++ guiPackages;
 

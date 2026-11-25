@@ -13,10 +13,8 @@ let
 in
 {
   imports = [
-    ../programs/amp.nix
     ../programs/fish.nix
     ../programs/starship.nix
-    ../programs/opencode.nix
     ../programs/tmux.nix
   ];
 
@@ -29,7 +27,6 @@ in
     "$HOME/.nix-profile/bin"
     "/nix/var/nix/profiles/default/bin"
     "$HOME/.local/bin"
-    "$HOME/.opencode/bin"
   ];
 
   home.sessionVariables = {
@@ -82,10 +79,6 @@ EOF
     # Keep mise available, but let the common Fish config update its environment
     # only after directory changes rather than once per prompt.
     set --export MVM_MISE_HOOK_ON_PWD 1
-
-    if test -d "$HOME/.opencode/bin"
-        fish_add_path "$HOME/.opencode/bin"
-    end
 
     set --export COREPACK_HOME "$HOME/.cache/corepack"
 
