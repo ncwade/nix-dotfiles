@@ -30,7 +30,7 @@ in
 
 {
   imports = [
-    ../programs/codex.nix
+    ../programs/retire-codex-customizations.nix
     ../programs/ghostty.nix
     ../programs/zed.nix
     ../programs/starship.nix

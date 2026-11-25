@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 {
   programs.rex = {
@@ -14,11 +14,4 @@
   # Preserve the existing PATH entry, now using the official package's CLI.
   home.file.".local/bin/rex".source = "${config.programs.rex.package}/bin/rex";
   home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
-
-  # Rex maintains its Codex skill and session-context hook using the installed CLI.
-  home.activation.installRexCodexSkills = lib.mkIf config.programs.rex.enable (
-    lib.hm.dag.entryAfter [ "installCodexSkills" ] ''
-      $DRY_RUN_CMD ${config.programs.rex.package}/bin/rex skill setup --agent codex
-    ''
-  );
 }

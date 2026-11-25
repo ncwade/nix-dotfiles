@@ -32,7 +32,7 @@ in
   imports = [
     ../programs/ghostty.nix
     ../programs/zed.nix
-    ../programs/codex.nix
+    ../programs/retire-codex-customizations.nix
     ../programs/starship.nix
     ../programs/fish.nix
     ../programs/tmux.nix
