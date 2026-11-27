@@ -13,6 +13,8 @@ let
       baseUrl = cfg.apertureBaseUrl;
     }
     // {
+      version = "0.18.0";
+      onboardingDone = cfg.apertureBaseUrl != "";
       dedicated = {
         enabled = true;
         providers = [ ];
@@ -29,6 +31,9 @@ let
       theme = cfg.theme;
       npmCommand = [ "${pkgs.nodejs}/bin/npm" ];
       packages = [ cfg.aperturePackage ];
+    }
+    // lib.optionalAttrs (cfg.defaultModel != null) {
+      defaultModel = cfg.defaultModel;
     }
     // lib.optionalAttrs cfg.enableCodemode {
       defaultTools = [ "+codemode" ];
@@ -64,6 +69,15 @@ in
         Base URL of the Tailscale Aperture gateway written to
         ~/.pi/agent/extensions/aperture.json. When empty, baseUrl is omitted so
         APERTURE_BASE_URL or /aperture:onboarding can supply it at runtime.
+      '';
+    };
+
+    defaultModel = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = ''
+        Default model ID under defaultProvider written to
+        ~/.pi/agent/settings.json (e.g. "tycho/inkling-2-mini").
       '';
     };
 
