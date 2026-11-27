@@ -32,6 +32,7 @@ in
   imports = [
     ../programs/retire-codex-customizations.nix
     ../programs/ghostty.nix
+    ../programs/pi.nix
     ../programs/zed.nix
     ../programs/starship.nix
     ../programs/fish.nix

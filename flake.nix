@@ -12,6 +12,7 @@
       desktop = import ./home-manager/ncwade.nix;
       cli = import ./home-manager/ncwade-cli.nix;
       mvm = import ./home-manager/mvm.nix;
+      pi = import ./programs/pi.nix;
       rex = {
         imports = [
           rex.homeManagerModules.default

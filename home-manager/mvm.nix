@@ -14,6 +14,7 @@ in
 {
   imports = [
     ../programs/fish.nix
+    ../programs/pi.nix
     ../programs/starship.nix
     ../programs/tmux.nix
   ];

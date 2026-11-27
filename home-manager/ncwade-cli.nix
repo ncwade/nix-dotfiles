@@ -31,6 +31,7 @@ in
 {
   imports = [
     ../programs/ghostty.nix
+    ../programs/pi.nix
     ../programs/zed.nix
     ../programs/retire-codex-customizations.nix
     ../programs/starship.nix

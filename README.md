@@ -4,7 +4,7 @@ Home Manager profiles, user programs, and themes for Nick Wade.
 
 ## Flake interface
 
-This flake exports `homeManagerModules.desktop`, `cli`, `mvm`, and `rex`.
+This flake exports `homeManagerModules.desktop`, `cli`, `mvm`, `pi`, and `rex`.
 The consuming machine flake supplies each account's username and home directory.
 The Rex module imports the pinned upstream Rex module together with its local configuration.
 This repository does not depend on `nix-hosts` or employer configuration.
